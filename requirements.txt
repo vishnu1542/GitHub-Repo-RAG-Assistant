@@ -1,0 +1,30 @@
+# Code parsing
+tree-sitter
+
+tree-sitter-python
+tree-sitter-java
+tree-sitter-javascript
+tree-sitter-typescript
+tree-sitter-html
+tree-sitter-css
+tree-sitter-c
+tree-sitter-cpp
+tree-sitter-c-sharp
+tree-sitter-go
+tree-sitter-rust
+tree-sitter-php
+tree-sitter-ruby
+# GitHub
+PyGithub
+
+# Environment variables
+python-dotenv
+
+# Embeddings
+sentence-transformers
+
+# Vector database
+chromadb
+
+# LLM
+openai
