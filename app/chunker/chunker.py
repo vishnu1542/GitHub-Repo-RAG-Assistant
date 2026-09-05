@@ -1,4 +1,9 @@
 from parser.language import CHUNK_NODE_TYPES
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document
+import csv
+import io
+import json
 class CodeChunk:
     def get_chunks(self,root,code,language,file_name,file_path):
         chunks=[]
@@ -66,3 +71,63 @@ class CodeChunk:
                 })
         return chunks
 
+    def get_document_chunks(self, document):
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=1000,
+            chunk_overlap=100
+        )
+
+        return splitter.split_documents([document])
+
+    def chunk_json(self, document):
+
+        data = json.loads(document.page_content)
+
+        documents = []
+
+        if isinstance(data, dict):
+
+            for key, value in data.items():
+
+                chunk = {
+                    key: value
+                }
+
+                documents.append(
+                    Document(
+                        page_content=json.dumps(
+                            chunk,
+                            indent=2
+                        ),
+                        metadata=document.metadata
+                    )
+                )
+
+        return documents
+
+
+    def chunk_csv(self, document):
+
+        rows = list(csv.reader(
+                io.StringIO(document.page_content)
+            ))
+
+        if not rows:
+            return []
+
+        header = rows[0]
+
+        schema = "CSV Columns:\n"
+
+        for column in header:
+            schema += f"- {column}\n"
+
+        return [
+            Document(
+                page_content=schema,
+                metadata={
+                    **document.metadata,
+                    "type": "csv_schema"
+                }
+            )
+        ]

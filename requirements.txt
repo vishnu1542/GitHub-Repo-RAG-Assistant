@@ -22,12 +22,12 @@ python-dotenv
 
 ##Chunking
 langchain_core
-
+langchain_text_splitters
 # Embeddings
 sentence-transformers
 
 # Vector database
-chromadb
+qdrant_client
 
 # LLM
 openai

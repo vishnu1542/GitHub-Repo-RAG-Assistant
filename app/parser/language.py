@@ -20,7 +20,12 @@ ALLOWED_EXTENSIONS = {
     ".cpp",
     ".c",
     ".h",
-    ".go"
+    ".go",
+    ".csv",
+    ".html",
+    ".txt",
+    ".json",
+    ".md"
 }
 IGNORE_DIRS = {
     ".git",
@@ -42,6 +47,10 @@ EXTENSION_TO_LANGUAGE = {
     ".jsx": "jsx",
     ".html": "html",
     ".htm": "html",
+    ".csv":"csv",
+    ".json":"json",
+    ".txt":"text",
+    ".md":"markdown",
     ".css": "css",
     ".scss": "scss",
     ".c": "c",
