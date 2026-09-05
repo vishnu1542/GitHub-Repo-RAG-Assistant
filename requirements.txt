@@ -20,6 +20,9 @@ PyGithub
 # Environment variables
 python-dotenv
 
+##Chunking
+langchain_core
+
 # Embeddings
 sentence-transformers
 

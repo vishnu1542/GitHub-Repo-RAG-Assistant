@@ -1,5 +1,4 @@
 from tree_sitter import Language, Parser
-
 import tree_sitter_python
 import tree_sitter_java
 import tree_sitter_javascript
@@ -40,10 +39,13 @@ class CodeParser:
         for name, language in TREE_SITTER_LANGUAGES.items():
             self.languages[name] = Language(language.language())
 
-    def parse(self, code, language):
+    def parse(self, code, language,file_name,file_path):
 
         parser = Parser(self.languages[language])
 
         tree = parser.parse(code.encode("utf-8"))
 
-        return tree
+        return tree,language,code,file_name,file_path
+
+    
+

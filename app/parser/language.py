@@ -31,79 +31,30 @@ IGNORE_DIRS = {
     "dist",
     "build"
 }
-LANGUAGES = {
-    "python": {
-        "extensions": [".py"],
-    },
-
-    "java": {
-        "extensions": [".java"],
-    },
-
-    "javascript": {
-        "extensions": [".js", ".mjs", ".cjs"],
-    },
-
-    "typescript": {
-        "extensions": [".ts"],
-    },
-
-    "tsx": {
-        "extensions": [".tsx"],
-    },
-
-    "jsx": {
-        "extensions": [".jsx"],
-    },
-
-    "html": {
-        "extensions": [".html", ".htm"],
-    },
-
-    "css": {
-        "extensions": [".css"],
-    },
-
-    "scss": {
-        "extensions": [".scss"],
-    },
-
-    "c": {
-        "extensions": [".c"],
-    },
-
-    "cpp": {
-        "extensions": [".cpp", ".cc", ".cxx", ".hpp"],
-    },
-
-    "csharp": {
-        "extensions": [".cs"],
-    },
-
-    "go": {
-        "extensions": [".go"],
-    },
-
-    "rust": {
-        "extensions": [".rs"],
-    },
-
-    "kotlin": {
-        "extensions": [".kt", ".kts"],
-    },
-
-    "swift": {
-        "extensions": [".swift"],
-    },
-
-    "php": {
-        "extensions": [".php"],
-    },
-
-    "ruby": {
-        "extensions": [".rb"],
-    },
-
+EXTENSION_TO_LANGUAGE = {
+    ".py": "python",
+    ".java": "java",
+    ".js": "javascript",
+    ".mjs": "javascript",
+    ".cjs": "javascript",
+    ".ts": "typescript",
+    ".tsx": "tsx",
+    ".jsx": "jsx",
+    ".html": "html",
+    ".htm": "html",
+    ".css": "css",
+    ".scss": "scss",
+    ".c": "c",
+    ".h": "c",
+    ".cpp": "cpp",
+    ".cc": "cpp",
+    ".cxx": "cpp",
+    ".hpp": "cpp",
+    ".cs": "csharp",
+    ".go": "go",
+    ".rs": "rust",
+    ".php": "php",
+    ".rb": "ruby",
 }
 TREE_SITTER_LANGUAGES = {
     "python": tree_sitter_python,

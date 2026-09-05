@@ -41,7 +41,7 @@ class GitHubRepoLoader:
                 elif item.type == "file":
 
                     extension = "." + item.name.split(".")[-1]
-
+                    file_name=item.path.split("/")[-1]
                     if extension in ALLOWED_EXTENSIONS:
                         language=EXTENSION_TO_LANGUAGE[extension]
                         code = item.decoded_content.decode("utf-8")
@@ -49,6 +49,7 @@ class GitHubRepoLoader:
                         files.append({
                         "language":language,
                         "path": item.path,
+                        "file_name":file_name,
                         "code": code
                         })
 
