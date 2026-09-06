@@ -17,6 +17,11 @@ tree-sitter-ruby
 # GitHub
 PyGithub
 
+# Backend
+fastapi
+uvicorn
+jinja2
+
 # Environment variables
 python-dotenv
 
@@ -25,9 +30,11 @@ langchain_core
 langchain_text_splitters
 # Embeddings
 sentence-transformers
+huggingface_hub
 
 # Vector database
 qdrant_client
 
 # LLM
 openai
+langchain_google_genai

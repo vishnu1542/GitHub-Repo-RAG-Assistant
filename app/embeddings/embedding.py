@@ -11,7 +11,7 @@ class HuggingFaceEmbedder:
 
     def __init__(self):
 
-        token = os.getenv("HF_INFERENCE")
+        token = os.getenv("HF_TOKEN") or os.getenv("HF_INFERENCE")
 
         if not token:
             raise ValueError("HF_TOKEN not found")

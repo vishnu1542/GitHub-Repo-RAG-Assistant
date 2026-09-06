@@ -1,4 +1,4 @@
-from parser.language import CHUNK_NODE_TYPES
+from app.parser.language import CHUNK_NODE_TYPES
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 import csv

@@ -53,6 +53,9 @@ class CodeParser:
             return document
             
         else:
+            if language not in self.languages:
+                raise ValueError(f"Unsupported language: {language}")
+
             parser = Parser(self.languages[language])
 
             tree = parser.parse(code.encode("utf-8"))

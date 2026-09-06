@@ -1,7 +1,9 @@
 import os
+from urllib.parse import urlparse
+
 from github import Github
 from dotenv import load_dotenv
-from parser.language import ALLOWED_EXTENSIONS, IGNORE_DIRS, EXTENSION_TO_LANGUAGE
+from app.parser.language import ALLOWED_EXTENSIONS, IGNORE_DIRS, EXTENSION_TO_LANGUAGE
 
 load_dotenv()
 
@@ -17,11 +19,18 @@ class GitHubRepoLoader:
         self.github = Github(token)
 
     def get_repositories(self, repo_url):
+        parsed = urlparse(repo_url.strip())
 
-        parts = repo_url.rstrip("/").split("/")
+        if parsed.netloc.lower() != "github.com":
+            raise ValueError("Please enter a valid GitHub repository URL.")
 
-        owner = parts[-2]
-        repo_name = parts[-1]
+        parts = [part for part in parsed.path.strip("/").split("/") if part]
+
+        if len(parts) < 2:
+            raise ValueError("GitHub URL must include an owner and repository name.")
+
+        owner = parts[0]
+        repo_name = parts[1].removesuffix(".git")
 
         return self.github.get_repo(f"{owner}/{repo_name}")
 
@@ -64,3 +73,6 @@ class GitHubRepoLoader:
         traverse("")
 
         return files
+
+    def load_repository(self, repo):
+        return self.get_files(repo)

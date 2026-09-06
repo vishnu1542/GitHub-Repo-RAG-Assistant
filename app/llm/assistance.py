@@ -20,6 +20,23 @@ class CodeAssistant:
             temperature=0
         )
 
+    def _content_to_text(self, content):
+        if isinstance(content, str):
+            return content
+
+        if isinstance(content, list):
+            text_parts = []
+
+            for item in content:
+                if isinstance(item, str):
+                    text_parts.append(item)
+                elif isinstance(item, dict) and item.get("type") == "text":
+                    text_parts.append(item.get("text", ""))
+
+            return "\n\n".join(part for part in text_parts if part).strip()
+
+        return str(content)
+
     def generate_answer(self, query, documents):
 
         context = "\n\n".join(
@@ -47,4 +64,4 @@ class CodeAssistant:
 
         response = self.llm.invoke(prompt)
 
-        return response.content
+        return self._content_to_text(response.content)

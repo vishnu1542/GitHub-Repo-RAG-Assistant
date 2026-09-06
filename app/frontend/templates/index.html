@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub Code Assistance</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Repository RAG</p>
+          <h1>GitHub Code Assistance</h1>
+        </div>
+        <div class="health-pill" id="healthStatus">Checking backend</div>
+      </header>
+
+      <section class="repo-panel" aria-labelledby="repoTitle">
+        <div class="repo-heading">
+          <div>
+            <h2 id="repoTitle">GitHub Repository</h2>
+            <p>Index a public repository, then ask focused questions against that codebase.</p>
+          </div>
+          <div class="repo-state" id="repoState">Waiting for repository</div>
+        </div>
+
+        <form class="repo-form" id="repoForm">
+          <label class="sr-only" for="repoUrl">Repository URL</label>
+          <input
+            id="repoUrl"
+            name="repoUrl"
+            type="url"
+            autocomplete="off"
+            placeholder="https://github.com/owner/repository"
+            required
+          />
+          <button type="submit" id="analyzeButton">
+            <span>Analyze Repository</span>
+          </button>
+        </form>
+
+        <div class="status-track" id="statusTrack" hidden>
+          <div class="status-row active">
+            <span></span>
+            <p>Connecting to GitHub</p>
+          </div>
+          <div class="status-row">
+            <span></span>
+            <p>Parsing files and creating chunks</p>
+          </div>
+          <div class="status-row">
+            <span></span>
+            <p>Generating embeddings and indexing</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="repo-card">
+          <p class="section-label">Active Repository</p>
+          <h2 id="activeRepo">No repository selected</h2>
+          <dl>
+            <div>
+              <dt>Project ID</dt>
+              <dd id="projectId">-</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd id="indexStatus">Not ready</dd>
+            </div>
+            <div>
+              <dt>Chunks</dt>
+              <dd id="chunkCount">-</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <section class="chat-panel" aria-labelledby="chatTitle">
+          <div class="chat-header">
+            <div>
+              <p class="section-label">Chat</p>
+              <h2 id="chatTitle">Ask about this repository</h2>
+            </div>
+          </div>
+
+          <div class="messages" id="messages">
+            <article class="message assistant">
+              <div class="message-bubble">
+                <p>Analyze a repository to start a focused code conversation.</p>
+              </div>
+            </article>
+          </div>
+
+          <form class="chat-form disabled" id="chatForm">
+            <label class="sr-only" for="chatInput">Ask about this repository</label>
+            <textarea
+              id="chatInput"
+              rows="1"
+              placeholder="Ask about this repository..."
+              disabled
+            ></textarea>
+            <button type="submit" id="sendButton" disabled aria-label="Send question">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

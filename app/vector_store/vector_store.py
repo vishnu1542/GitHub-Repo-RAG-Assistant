@@ -12,8 +12,8 @@ load_dotenv()
 class VectorStore:
 
     def __init__(self, vector_size):
-        self.url = os.getenv("QDRANT_URL")
-        self.api_key = os.getenv("QDRANT_API_KEY")
+        self.url = os.getenv("QDRANT_URL") or os.getenv("Qdrant_URL")
+        self.api_key = os.getenv("QDRANT_API_KEY") or os.getenv("Qdrant_API_KEY")
 
         if not self.url or not self.api_key:
             raise ValueError("QDRANT_URL or QDRANT_API_KEY not found")
