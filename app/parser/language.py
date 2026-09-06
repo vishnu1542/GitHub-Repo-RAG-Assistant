@@ -22,7 +22,6 @@ ALLOWED_EXTENSIONS = {
     ".h",
     ".go",
     ".csv",
-    ".html",
     ".txt",
     ".json",
     ".md"

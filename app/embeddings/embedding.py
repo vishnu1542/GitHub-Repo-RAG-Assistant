@@ -23,6 +23,11 @@ class HuggingFaceEmbedder:
 
         self.model = "BAAI/bge-small-en-v1.5"
 
+    def embed_query(self, query):
+        return self.client.feature_extraction(
+            query,
+            model=self.model
+        )
     def embed_documents(self, documents):
 
         texts = [

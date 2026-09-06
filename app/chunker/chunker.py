@@ -15,7 +15,7 @@ class CodeChunk:
             if child.type==self.Class:
                 class_code = code[
                     child.start_byte:child.end_byte
-                ].decode("utf-8")
+                ]
 
                 lines = class_code.count("\n") + 1
                 if lines <= 50:
@@ -43,7 +43,7 @@ class CodeChunk:
 
                                 method_code = code[
                                     method.start_byte:method.end_byte
-                                ].decode("utf-8")
+                                ]
 
                                 chunks.append({
                                     "type": "method",
@@ -58,7 +58,7 @@ class CodeChunk:
 
                 function_code = code[
                     child.start_byte:child.end_byte
-                ].decode("utf-8")
+                ]
 
                 chunks.append({
                     "type": "function",
