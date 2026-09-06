@@ -29,7 +29,6 @@ python-dotenv
 langchain_core
 langchain_text_splitters
 # Embeddings
-sentence-transformers
 huggingface_hub
 
 # Vector database
