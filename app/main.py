@@ -244,9 +244,17 @@ def index_repository(repo_url: str) -> RepositoryResponse:
             detail=str(exc),
         ) from exc
     except Exception as exc:
+        import traceback
+    
+        print("========== INDEXING ERROR ==========")
+        print(f"TYPE: {type(exc).__name__}")
+        print(f"ERROR: {exc}")
+        traceback.print_exc()
+        print("====================================")
+    
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Repository indexing failed. Please check backend configuration and try again.",
+            detail=f"{type(exc).__name__}: {exc}",
         ) from exc
 
 
