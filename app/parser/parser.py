@@ -18,7 +18,7 @@ TREE_SITTER_LANGUAGES = {
     "python": tree_sitter_python.language,
     "java": tree_sitter_java.language,
     "javascript": tree_sitter_javascript.language,
-    "typescript": tree_sitter_typescript.language_tsx,
+    "typescript": tree_sitter_typescript.language_typescript,
     "html": tree_sitter_html.language,
     "css": tree_sitter_css.language,
     "c": tree_sitter_c.language,
