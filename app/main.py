@@ -167,22 +167,48 @@ def index_repository(repo_url: str) -> RepositoryResponse:
             )
 
         files = loader.load_repository(repo)
+        print(f"LOADED FILES: {len(files)}")
+        
         if not files:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                 detail="No supported files were found in this repository.",
             )
-
+        
         documents = parse_and_chunk_files(files)
+        print(f"CREATED CHUNKS: {len(documents)}")
+        
         if not documents:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                 detail="No indexable code chunks were created from this repository.",
             )
-
+        
         embedder = HuggingFaceEmbedder()
+        print("EMBEDDER CREATED")
+        
         embeddings = embedder.embed_documents(documents)
+        print(f"CREATED EMBEDDINGS: {len(embeddings)}")
+        print(f"EMBEDDING DIMENSION: {len(embeddings[0])}")
+        
         vector_store.store_embeddings(documents, embeddings, project_id)
+        print("QDRANT UPSERT COMPLETED")
+        # if not files:
+        #     raise HTTPException(
+        #         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        #         detail="No supported files were found in this repository.",
+        #     )
+
+        # documents = parse_and_chunk_files(files)
+        # if not documents:
+        #     raise HTTPException(
+        #         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        #         detail="No indexable code chunks were created from this repository.",
+        #     )
+
+        # embedder = HuggingFaceEmbedder()
+        # embeddings = embedder.embed_documents(documents)
+        # vector_store.store_embeddings(documents, embeddings, project_id)
 
         return RepositoryResponse(
             project_id=project_id,
