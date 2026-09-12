@@ -97,7 +97,7 @@ def parse_and_chunk_files(files: list[dict[str, Any]]) -> list[Any]:
 
     for file in files:
         language = file["language"]
-
+    
         try:
             parsed = parser.parse(
                 file["code"],
@@ -105,43 +105,50 @@ def parse_and_chunk_files(files: list[dict[str, Any]]) -> list[Any]:
                 file["file_name"],
                 file["path"],
             )
-        except ValueError:
-            continue
-
-        if language in ["json", "csv", "text", "markdown"]:
-            if language == "json":
-                file_documents = chunker.chunk_json(parsed)
-            elif language == "csv":
-                file_documents = chunker.chunk_csv(parsed)
-            else:
-                file_documents = chunker.get_document_chunks(parsed)
-
-            documents.extend(file_documents)
-            continue
-
-        tree, language, code, file_name, file_path = parsed
-        chunks = chunker.get_chunks(
-            tree.root_node,
-            code,
-            language,
-            file_name,
-            file_path,
-        )
-
-        for chunk in chunks:
-            documents.append(
-                Document(
-                    page_content=chunk["code"],
-                    metadata={
-                        "type": chunk["type"],
-                        "language": chunk["language"],
-                        "start_line": chunk["start_line"],
-                        "end_line": chunk["end_line"],
-                        "file_name": chunk["file_name"],
-                        "file_path": chunk["file_path"],
-                    },
-                )
+    
+            if language in ["json", "csv", "text", "markdown"]:
+                if language == "json":
+                    file_documents = chunker.chunk_json(parsed)
+                elif language == "csv":
+                    file_documents = chunker.chunk_csv(parsed)
+                else:
+                    file_documents = chunker.get_document_chunks(parsed)
+    
+                documents.extend(file_documents)
+                continue
+    
+            tree, language, code, file_name, file_path = parsed
+    
+            chunks = chunker.get_chunks(
+                tree.root_node,
+                code,
+                language,
+                file_name,
+                file_path,
             )
+    
+            for chunk in chunks:
+                documents.append(
+                    Document(
+                        page_content=chunk["code"],
+                        metadata={
+                            "type": chunk["type"],
+                            "language": chunk["language"],
+                            "start_line": chunk["start_line"],
+                            "end_line": chunk["end_line"],
+                            "file_name": chunk["file_name"],
+                            "file_path": chunk["file_path"],
+                        },
+                    )
+                )
+    
+        except Exception as exc:
+            print(
+                f"SKIPPING FILE: {file['path']} | "
+                f"LANGUAGE: {language} | "
+                f"ERROR: {type(exc).__name__}: {exc}"
+            )
+            continue
 
     return documents
 
