@@ -59,9 +59,16 @@ class GitHubRepoLoader:
                     if extension in ALLOWED_EXTENSIONS:
 
                         language = EXTENSION_TO_LANGUAGE[extension]
-
-                        code = item.decoded_content.decode("utf-8")
-
+                    
+                        try:
+                            code = item.decoded_content.decode("utf-8")
+                        except UnicodeDecodeError as exc:
+                            print(
+                                f"SKIPPING NON-UTF8 FILE: {item.path} | "
+                                f"ERROR: {type(exc).__name__}: {exc}"
+                            )
+                            continue
+                    
                         files.append({
                             "language": language,
                             "path": item.path,
