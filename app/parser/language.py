@@ -17,14 +17,20 @@ ALLOWED_EXTENSIONS = {
     ".java",
     ".js",
     ".ts",
-    ".cpp",
+    ".html",
+    ".css",
     ".c",
     ".h",
+    ".cpp",
     ".go",
+    ".rs",
+    ".php",
+    ".rb",
+    ".cs",
+    ".json",
     ".csv",
     ".txt",
-    ".json",
-    ".md"
+    ".md",
 }
 IGNORE_DIRS = {
     ".git",
@@ -38,31 +44,37 @@ IGNORE_DIRS = {
 EXTENSION_TO_LANGUAGE = {
     ".py": "python",
     ".java": "java",
+
     ".js": "javascript",
     ".mjs": "javascript",
     ".cjs": "javascript",
+
     ".ts": "typescript",
     ".tsx": "tsx",
-    ".jsx": "jsx",
+
     ".html": "html",
     ".htm": "html",
-    ".csv":"csv",
-    ".json":"json",
-    ".txt":"text",
-    ".md":"markdown",
+
     ".css": "css",
-    ".scss": "scss",
+
     ".c": "c",
     ".h": "c",
+
     ".cpp": "cpp",
     ".cc": "cpp",
     ".cxx": "cpp",
     ".hpp": "cpp",
+
     ".cs": "csharp",
     ".go": "go",
     ".rs": "rust",
     ".php": "php",
     ".rb": "ruby",
+
+    ".csv": "csv",
+    ".json": "json",
+    ".txt": "text",
+    ".md": "markdown",
 }
 TREE_SITTER_LANGUAGES = {
     "python": tree_sitter_python,
